@@ -37,7 +37,10 @@ class MovieList extends Component {
                 <th>{movie.numberInStock}</th>
                 <th>{movie.dailyRentalRate}</th>
                 <th>
-                  <button onClick={() => this.handleDelete(movie)}>
+                  <button
+                    className={"btn btn-danger btn-sm"}
+                    onClick={() => this.handleDelete(movie)}
+                  >
                     Delete
                   </button>
                 </th>
