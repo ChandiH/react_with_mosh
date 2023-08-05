@@ -2,7 +2,7 @@ import React from "react";
 import Counter from "./counterComponent";
 
 const Counters = (props) => {
-  const { counters, onDelete, onIncrement, onReset } = props;
+  const { counters, onDelete, onIncrement, onDecrement, onReset } = props;
 
   return (
     <div>
@@ -15,6 +15,7 @@ const Counters = (props) => {
           counter={counter}
           onDelete={onDelete}
           onIncrement={onIncrement}
+          onDecrement={onDecrement}
           id={counter.id}
         />
       ))}

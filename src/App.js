@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Counters from "./components/counters";
 import NavBar from "./components/navbar";
-
+import MovieList from "./components/movieListComponent";
 class App extends Component {
   state = {
     counters: [
@@ -21,6 +21,13 @@ class App extends Component {
     this.setState({ counters });
   };
 
+  handleDecrement = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value--;
+    this.setState({ counters });
+  };
   handleDelete = (counterId) => {
     console.log(counterId);
     this.setState({
@@ -44,8 +51,9 @@ class App extends Component {
             onDelete={this.handleDelete}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
           />
-          {/*<MovieList />*/}
+          <MovieList />
         </main>
       </React.Fragment>
     );

@@ -1,22 +1,36 @@
 import React from "react";
 
 const Counter = (props) => {
-  const { counter, onIncrement, onDelete } = props;
+  const { counter, onIncrement, onDecrement, onDelete } = props;
+
   return (
-    <div>
-      <span>{counter.value}</span>
-      <button
-        className={"btn btn-secondary btn-sm m-2"}
-        onClick={() => onIncrement(props.counter)}
-      >
-        increment
-      </button>
-      <button
-        className={"btn btn-danger btn-sm m-2"}
-        onClick={() => onDelete(props.counter.id)}
-      >
-        delete
-      </button>
+    <div className="row">
+      <div className="col-1">
+        <span>{counter.value}</span>
+      </div>
+      <div className="col">
+        <button
+          className={"btn btn-secondary btn-sm"}
+          onClick={() => onIncrement(props.counter)}
+        >
+          +
+        </button>
+        <button
+          className={"btn btn-sm m-2 btn-secondary"}
+          onClick={() => {
+            if (props.counter.value > 0) onDecrement(props.counter);
+          }}
+          disabled={props.counter.value === 0}
+        >
+          -
+        </button>
+        <button
+          className={"btn btn-danger btn-sm"}
+          onClick={() => onDelete(props.counter.id)}
+        >
+          x
+        </button>
+      </div>
     </div>
   );
 };
