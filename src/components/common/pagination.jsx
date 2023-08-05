@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 
-const Pagintaion = (props) => {
+const Pagination = (props) => {
   const { totalItems, pageSize, onPageChange, currentPage } = props;
   const pageCount = Math.ceil(totalItems / pageSize);
 
@@ -27,4 +27,4 @@ const Pagintaion = (props) => {
   );
 };
 
-export default Pagintaion;
+export default Pagination;
