@@ -12,10 +12,9 @@ const heart = (
   </svg>
 );
 
-const LikeComponent = (props) => {
-  const { liked } = props;
+const LikeComponent = ({ liked, onClick }) => {
   return (
-    <div onClick={props.onClick} style={{ cursor: "pointer" }}>
+    <div onClick={onClick} style={{ cursor: "pointer" }}>
       {liked && heart}
       {!liked && heaertOutline}
     </div>
