@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import "./App.css";
 import Counters from "./components/counters";
 import NavBar from "./components/navbar";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
 import MovieList from "./components/movieListComponent";
+
 class App extends Component {
   state = {
     counters: [
@@ -28,6 +35,7 @@ class App extends Component {
     counters[index].value--;
     this.setState({ counters });
   };
+
   handleDelete = (counterId) => {
     console.log(counterId);
     this.setState({
@@ -39,22 +47,57 @@ class App extends Component {
     this.setState(this.state.counters.map((c) => (c.value = 0)));
   };
 
+  pressed = () => console.log("pressed");
+
+  router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<NavBar />}>
+        <Route path="movies" element={<MovieList />} />
+        <Route
+          path="counters"
+          element={
+            <Counters
+              counters={this.state.counters}
+              onDelete={this.handleDelete}
+              onReset={this.handleReset}
+              onIncrement={this.handleIncrement}
+              onDecrement={this.handleDecrement}
+            />
+          }
+        />
+      </Route>
+    )
+  );
+
+  // router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <NavBar />,
+  //     children: [
+  //       {
+  //         path: "movies",
+  //         element: <MovieList />,
+  //       },
+  //       {
+  //         path: "counters",
+  //         element: (
+  //           <Counters
+  //             counters={this.state.counters}
+  //             onDelete={this.handleDelete}
+  //             onReset={this.handleReset}
+  //             onIncrement={this.handleIncrement}
+  //             onDecrement={this.handleDecrement}
+  //           />
+  //         ),
+  //       },
+  //     ],
+  //   },
+  // ]);
+
   render() {
     return (
       <React.Fragment>
-        <NavBar
-          totalCounters={this.state.counters.filter((c) => c.value > 0).length}
-        />
-        <main className="container">
-          <Counters
-            counters={this.state.counters}
-            onDelete={this.handleDelete}
-            onReset={this.handleReset}
-            onIncrement={this.handleIncrement}
-            onDecrement={this.handleDecrement}
-          />
-          <MovieList />
-        </main>
+        <RouterProvider router={this.router} />
       </React.Fragment>
     );
   }
