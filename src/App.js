@@ -13,6 +13,7 @@ import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/notfound";
 import MovieForm from "./components/movieForm";
+import LoginForm from "./components/loginForm";
 
 class App extends Component {
   state = {
@@ -73,6 +74,7 @@ class App extends Component {
         /> */}
         <Route path="customers" element={<Customers />} />
         <Route path="rentals" element={<Rentals />} />
+        <Route path="login" element={<LoginForm />} />
         <Route path="not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/not-found" replace />} />
       </Route>
