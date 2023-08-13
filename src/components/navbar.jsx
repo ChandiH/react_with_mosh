@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 
 const NavBar = ({ totalCounters }) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <span className="navbar-brand">Vidly</span>
+        <Link className="navbar-brand" to="/">
+          Vidly
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -19,18 +21,17 @@ const NavBar = ({ totalCounters }) => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/movies">
-                Movies
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/counters">
-                Counters
-              </Link>
-            </li>
-          </ul>
+          <div className="navbar-nav mr-auto">
+            <NavLink className="nav-link nav-item" to="/movies">
+              Movies
+            </NavLink>
+            <NavLink className="nav-link nav-item" to="/customers">
+              Customers
+            </NavLink>
+            <NavLink className="nav-link nav-item" to="/rentals">
+              Rentals
+            </NavLink>
+          </div>
         </div>
       </nav>
       <Outlet />

@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
-import Counters from "./components/counters";
 import NavBar from "./components/navbar";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
+  Navigate,
 } from "react-router-dom";
 import MovieList from "./components/movieListComponent";
+import Customers from "./components/customers";
+import Rentals from "./components/rentals";
+import NotFound from "./components/notfound";
+import MovieForm from "./components/movieForm";
 
 class App extends Component {
   state = {
@@ -51,9 +55,11 @@ class App extends Component {
 
   router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<NavBar />}>
+      <Route path="/*" element={<NavBar />}>
+        <Route index element={<Navigate to="/movies" replace />} />
         <Route path="movies" element={<MovieList />} />
-        <Route
+        <Route path="movies/:id" element={<MovieForm />} />
+        {/* <Route
           path="counters"
           element={
             <Counters
@@ -64,7 +70,11 @@ class App extends Component {
               onDecrement={this.handleDecrement}
             />
           }
-        />
+        /> */}
+        <Route path="customers" element={<Customers />} />
+        <Route path="rentals" element={<Rentals />} />
+        <Route path="not-found" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/not-found" replace />} />
       </Route>
     )
   );
