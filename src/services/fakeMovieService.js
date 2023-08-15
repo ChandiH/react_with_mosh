@@ -69,20 +69,24 @@ const movies = [
 ];
 
 export function getMovies() {
-  return movies;
+  return { ...movies };
 }
 
 export function getMovie(id) {
-  return movies.find((m) => m._id === id);
+  const result = movies.find((m) => m._id === id);
+  return { ...result };
 }
 
 export function saveMovie(movie) {
-  let movieInDb = movies.find((m) => m._id === movie._id) || {};
-  movieInDb.name = movie.name;
-  movieInDb.genre = genresAPI.genres.find((g) => g._id === movie.genreId);
+  console.log("got this to save", movie);
+  const movieInDb = getMovie(movie._id);
+  console.log("previous", movieInDb);
+  movieInDb.title = movie.title;
+  const genre = genresAPI.getGenere(movie.genre);
+  movieInDb.genre = genre ? genre : genresAPI.saveGenre(movie.genre);
   movieInDb.numberInStock = movie.numberInStock;
   movieInDb.dailyRentalRate = movie.dailyRentalRate;
-
+  console.log("new", movieInDb);
   if (!movieInDb._id) {
     movieInDb._id = Date.now();
     movies.push(movieInDb);
